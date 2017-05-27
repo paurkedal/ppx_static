@@ -9,5 +9,6 @@ build: ["jbuilder" "build" "--root" "." "-j" jobs "@install"]
 depends: [
   "jbuilder" {build}
   "ocaml-migrate-parsetree"
+  "topkg-jbuilder" {build}
 ]
 available: [ocaml-version >= "4.04.1"]
