@@ -11,4 +11,4 @@ depends: [
   "ocaml-migrate-parsetree"
   "topkg-jbuilder" {build}
 ]
-available: [ocaml-version >= "4.04.1"]
+available: [ocaml-version >= "4.02.3"]
