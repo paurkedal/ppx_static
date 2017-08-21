@@ -43,11 +43,11 @@ let name_for e =
 let rewrite_expr mapper maybe_extension =
   (match maybe_extension.pexp_desc with
    | Pexp_extension ({txt = "static"; loc},
-                     PStr [{pstr_desc = Pstr_eval (pexp, [])}]) ->
+                     PStr [{pstr_desc = Pstr_eval (pexp, []); _}]) ->
       (match pexp.pexp_desc with
        | Pexp_let _ ->
           error ~loc "The semantics of let%static is left undecided for now."
-       | expr ->
+       | _ ->
           (* [%static ...] *)
           let var = name_for pexp in
           let binding = {
