@@ -1,6 +1,6 @@
 opam-version: "1.2"
-maintainer: "paurkedal@gmail.com"
-authors: ["Petter A. Urkedal <paurkedal@gmail.com>"]
+maintainer: "Petter A. Urkedal <paurkedal@gmail.com>"
+author: "Petter A. Urkedal <paurkedal@gmail.com>"
 homepage: "https://github.com/paurkedalt/ppx_static"
 bug-reports: "https://github.com/paurkedalt/ppx_static/issues"
 dev-repo: "https://github.com/paurkedalt/ppx_static.git"
