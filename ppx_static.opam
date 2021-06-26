@@ -6,7 +6,7 @@ homepage: "https://github.com/paurkedalt/ppx_static"
 bug-reports: "https://github.com/paurkedalt/ppx_static/issues"
 depends: [
   "ocaml" {>= "4.02.3"}
-  "jbuilder" {build}
+  "dune" {>= "2.8" & build}
   "ocaml-migrate-parsetree"
 ]
 build: ["jbuilder" "build" "--root" "." "-j" jobs "@install"]

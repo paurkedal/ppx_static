@@ -1,0 +1,11 @@
+(library
+  (name ppx_static)
+  (public_name ppx_static)
+  (kind ppx_rewriter)
+  (modules ppx_static)
+  (libraries ocaml-migrate-parsetree))
+
+(tests
+  (names test_ppx_static)
+  (modules test_ppx_static)
+  (preprocess (pps ppx_static)))
