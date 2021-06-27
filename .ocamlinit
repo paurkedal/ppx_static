@@ -1,1 +1,0 @@
-#ppx "_build/default/.ppx/ppx_static/ppx.exe --as-ppx"
