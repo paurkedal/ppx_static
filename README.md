@@ -18,7 +18,7 @@ end
 is translated to
 ```ocaml
 let __ppx_static_1234 = 360.0 /. (8.0 *. atan 1.0) in
-(* ... *)
+
 module Geometry = struct
   let to_degrees x = x *. __ppx_static_1234
 end

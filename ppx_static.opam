@@ -11,3 +11,25 @@ depends: [
 ]
 build: ["jbuilder" "build" "--root" "." "-j" jobs "@install"]
 dev-repo: "git+https://github.com/paurkedalt/ppx_static.git"
+synopsis: "A PPX rewriter to lift expressions out of a local scope"
+description: """
+This is a simple syntax extension to lift the computation of a value out of
+any surrounding abstractions.  This allows expressing anonymous constants
+close to where they are used, without the penalty of recomputing them on
+each function invocation or module application.  A secondary use is to add
+state deep within a function, which persists across invocations.
+
+As an example,
+
+  module Geometry = struct
+    let to_degrees x = x *. [%static 360.0 /. (8.0 *. atan 1.0)]
+  end
+
+is translated to
+
+  let __ppx_static_1234 = 360.0 /. (8.0 *. atan 1.0) in
+
+  module Geometry = struct
+    let to_degrees x = x *. __ppx_static_1234
+  end
+"""
