@@ -1,4 +1,4 @@
-(* Copyright (C) 2017  Petter A. Urkedal <paurkedal@gmail.com>
+(* Copyright (C) 2017--2021  Petter A. Urkedal <paurkedal@gmail.com>
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
@@ -14,6 +14,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *)
 
+(* Top-Level Let *)
+
 let f x =
   let g y = [%static Random.bits () mod 1000] + x - y in
   let g0 = g 0 in
@@ -25,7 +27,52 @@ let fresh pfx =
   incr counter;
   pfx ^ string_of_int !counter
 
+let test_module () =
+  let a = [%static 1] in
+  let module M = struct
+    let f x =
+      let b = [%static 2] in
+      x + b
+  end in
+  assert (M.f a = 3)
+
+(* Nested *)
+
+let test_nested () =
+  let a = [%static
+    let f x =
+      let b = [%static 100] in
+      b + x
+    in
+    f 1
+  ] in
+  assert (a = 101)
+
+(* Functors *)
+
+module Test_functor = struct
+  module Counter () = struct
+    let next () =
+      let counter = [%static ref 0] in
+      incr counter;
+      !counter
+  end
+  module C1 = Counter ()
+  module C2 = Counter ()
+
+  let run () =
+    (* Static definitions are hoisted out of functors. *)
+    assert (C1.next () = 1);
+    assert (C2.next () = 2);
+    assert (C1.next () = 3)
+end
+
+(* Main *)
+
 let () =
   for x = 1 to 100 do f x done;
   assert (fresh "x" = "x1");
-  assert (fresh "x" = "x2")
+  assert (fresh "x" = "x2");
+  test_module ();
+  test_nested ();
+  Test_functor.run ()

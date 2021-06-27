@@ -3,7 +3,7 @@
   (public_name ppx_static)
   (kind ppx_rewriter)
   (modules ppx_static)
-  (libraries ocaml-migrate-parsetree))
+  (libraries ppxlib))
 
 (tests
   (names test_ppx_static)
